@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package proto.app.v1;
+package app.v1;
 
 option go_package = "github.com/kkk777-7/grpc-lb-demo/apis/proto/app/v1;appv1";
 

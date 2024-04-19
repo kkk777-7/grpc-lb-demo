@@ -44,7 +44,7 @@ func main() {
 
 	healthSrv := health.NewServer()
 	healthpb.RegisterHealthServer(s, healthSrv)
-	healthSrv.SetServingStatus("proto.app.v1", healthpb.HealthCheckResponse_SERVING)
+	healthSrv.SetServingStatus("app.v1", healthpb.HealthCheckResponse_SERVING)
 
 	reflection.Register(s)
 
