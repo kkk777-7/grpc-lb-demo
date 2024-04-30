@@ -28,18 +28,14 @@ check: buf-mod-update buf-format buf-generate
 GOOS ?= linux
 GOARCH ?= amd64
 TAG ?= dev
-IMG ?= 
-LDFLAGS ?= \
-	-X github.com/cycloud-io/sdk-go/pkg/version.gitVersion=$(shell git describe --tags --match='v*' --abbrev=0) \
-	-X github.com/cycloud-io/sdk-go/pkg/version.gitCommit=$(shell git rev-parse HEAD) \
-	-X github.com/cycloud-io/sdk-go/pkg/version.buildDate=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
+IMG ?=
 
 bin:
 	mkdir -p $@
 
 .PHONY: bin/app
 bin/app: bin
-	CGO_ENABLED=0 GOOS=$(GOOS) GOARCH=$(GOARCH) go build -ldflags="$(LDFLAGS)" -o $@ -v ./cmd/server
+	CGO_ENABLED=0 GOOS=$(GOOS) GOARCH=$(GOARCH) go build -o $@ -v ./cmd/server
 
 .PHONY: docker-build
 docker-build:
