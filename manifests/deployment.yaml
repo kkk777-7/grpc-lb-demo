@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-lb-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grpc-lb-demo
+  template:
+    metadata:
+      labels:
+        app: grpc-lb-demo
+    spec:
+      containers:
+      - name: grpc-hello-server
+        image: kkk777/grpc-lb-demo:dev
+        ports:
+        - containerPort: 50051

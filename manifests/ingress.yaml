@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grpc-lb-demo
+  annotations:
+    ake.cycloud.io/ingress.grpc: "true"
+    ake.cycloud.io/ingress.monitor-type: "GRPC"
+    cert-manager.io/issuer: "ingress-issuer"
+    cert-manager.io/common-name: "example.com"
+spec:
+  ingressClassName: internal-ake-slb
+  rules:
+  - host: "example.com"
+    http:
+      paths:
+      - path: "/"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: grpc-lb-demo
+            port:
+              number: 443
+  tls:
+  - hosts:
+    - "example.com"
+    secretName: grpc-lb-demo-tls
